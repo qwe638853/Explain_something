@@ -35,7 +35,7 @@
           <v-card-title>分析結果</v-card-title>
           <v-card-text>
             <div class="pre-container">
-              <pre>{{ JSON.stringify(analysisResult, null, 2) }}</pre>
+              <pre>{{ analysisResult}}</pre>
             </div>
           </v-card-text>
         </v-card>
@@ -73,7 +73,9 @@ export default {
           address: this.walletAddress,
           period: this.period
         });
+        
         this.analysisResult = response.data.analysis;
+        console.log(this.analysisResult); 
       }catch (error) {
         console.error("Error analyzing wallet:", error);
         this.errorMessage = "分析失敗，請檢查錢包地址或稍後再試。";
@@ -125,12 +127,13 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-family: Consolas, Menlo, Monaco, monospace;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
-
+.pre-container pre {
+  white-space: pre-wrap;    /* 允許換行 */
+  word-wrap: break-word;    /* IE/Edge 支援 */
+  overflow-wrap: break-word;/* 現代瀏覽器支援 */
+}
 
 
 
